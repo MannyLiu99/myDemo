@@ -1,0 +1,36 @@
+{
+  "name": "weichat",
+  "version": "0.0.1",
+  "description": "中交出行微信端",
+  "main": "index.html",
+  "dependencies": {},
+  "devDependencies": {
+    "autoprefixer": "^6.5.4",
+    "browser-sync": "^2.18.5",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-imagemin": "^3.1.1",
+    "gulp-less": "^3.3.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-postcss": "^6.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.0",
+    "gulp-watch": "^4.3.11",
+    "gulp.spritesmith": "^6.2.1"
+  },
+  "scripts": {
+    "start": "gulp start"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "mobile",
+    "wechat",
+    "weixin"
+  ],
+  "author": "huanghai",
+  "homepage": "https://www.szzjcx.com"
+}

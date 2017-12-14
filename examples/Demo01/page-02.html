@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>中交出行</title>
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <link href="../../dist/stylesheets/simpleui.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../../dist/stylesheets/base/vectors.css">
+    <link rel="stylesheet" href="../../dist/stylesheets/Demo01/page-02.css">
+</head>
+<body>
+<!--加载中-->
+<div class="loading">
+    <div class="sui-mask sui-mask-visible">
+        <div class="loadEffect">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="loading-tips">加载中，请稍后</div>
+    </div>
+</div>
+
+<div class="all-content">
+    <!--抽奖转盘部分-->
+    <div class="rotation-main-content">
+        <div id="lottery">
+            <div class="times">今日还有<span>xx</span>次抽奖机会</div>
+            <table style="border-collapse:separate; border-spacing:0.085rem;">
+                <tbody>
+                <tr>
+                    <!--active为中奖时的样式-->
+                    <td class="lottery-unit lottery-unit-1">
+                        <div class="rotation-img"></div>
+                        <div class="rotation-tips">谢谢参与</div>
+                    </td>
+                    <td class="lottery-unit lottery-unit-2">
+                        <div class="rotation-img">
+                            <!--优惠券面额-->
+                            <div class="amount"><span>¥</span>888.00</div>
+                        </div>
+                        <div class="rotation-tips">优惠券</div>
+                    </td>
+                    <td class="lottery-unit lottery-unit-3">
+                        <div class="rotation-img"></div>
+                        <div class="rotation-tips">一个字数很多的奖</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lottery-unit lottery-unit-8">
+                        <div class="rotation-img"></div>
+                        <div class="rotation-tips">谢谢参与</div>
+                    </td>
+                    <!--不能抽奖时添加end样式-->
+                    <td><button id="rotation-button" class="rotation-btn">立即抽奖</button></td>
+                    <td class="lottery-unit lottery-unit-4">
+                        <div class="rotation-img"></div>
+                        <div class="rotation-tips">一个字数很多的奖</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="lottery-unit lottery-unit-7">
+                        <div class="rotation-img"></div>
+                        <div class="rotation-tips">一个字数很多的奖</div>
+                    </td>
+                    <td class="lottery-unit lottery-unit-6">
+                        <div class="rotation-img"></div>
+                        <div class="rotation-tips">红包</div>
+                    </td>
+                    <td class="lottery-unit lottery-unit-5">
+                        <div class="rotation-img">
+                            <!--优惠券面额-->
+                            <div class="amount"><span>¥</span>888.00</div>
+                        </div>
+                        <div class="rotation-tips">优惠券</div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--分享-->
+    <div class="sharing"><button id="sharing-btn">分享赢抽获奖机会</button></div>
+    <div class="sharing-tips" style="display: none">
+        <div class="sharing-title"></div>
+    </div>
+    <!--我的奖品-->
+    <div class="my-prizes">
+        <div class="title">我的奖品</div>
+        <div class="prizes-list-content">
+            <div class="prizes-list">
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>奖品名称奖品名称</td>
+                        <td>06-27 14:30</td>
+                        <td class="detail"><a>查看详情</a></td>
+                    </tr>
+                    <tr>
+                        <td>奖品名称</td>
+                        <td>06-27 14:30</td>
+                        <td class="detail"><a>查看详情</a></td>
+                    </tr>
+                    <tr>
+                        <td>奖品名称奖品</td>
+                        <td>06-27 14:30</td>
+                        <td class="detail"><a>查看详情</a></td>
+                    </tr>
+                    <tr>
+                        <td>奖品名称</td>
+                        <td>06-27 14:30</td>
+                        <td class="detail"><a>查看详情</a></td>
+                    </tr>
+                    <tr>
+                        <td>奖品名称</td>
+                        <td>06-27 14:30</td>
+                        <td class="detail"><a>查看详情</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../dist/javascripts/zepto.min.js"></script>
+<script src="../../dist/javascripts/simpleui.min.js"></script>
+<!--<script src="../../dist/javascripts/vectors.min.js"></script>-->
+
+<script>
+    $(function () {
+
+        /*模拟加载中*/
+        setTimeout(function(){
+            $('.loading').hide();
+        },1500);
+
+        /*抽奖按钮点击事件*/
+        var isFinished = false; //活动已结束标志
+        var startFlag = true; //满足条件可以开始抽奖标志
+        if(isFinished){
+            // 活动已结束 button禁用，背景颜色切换，活动已结束提示
+            $('#rotation-button').disabled = 'disabled';
+            $('#rotation-button').addClass('end');
+            $('.times').html('抱歉，活动已结束')
+        }else {
+            //活动未结束
+            $('#rotation-button').on('click',function(){
+                if(startFlag){
+                    //抽奖
+                    lottery.init('lottery');
+                    lottery.speed = 100;
+                    lottery.prize =  Math.random()*(lottery.count)|1;
+                    roll();
+                }else{
+                    //TODO 不能抽奖的弹窗信息：活动未开始或者指定区域参加
+                    var message = '活动尚未开始，敬请期待';
+                    myDialog(message);
+                }
+            });
+        }
+
+        //分享按钮点击事件
+        $('#sharing-btn').on('click',function(){
+            $('.sharing-tips').css('display','block');
+        });
+
+        //点击分享提示空白部分，分享提示消失
+        $('.sharing-tips').on('click',function(){
+            $(this).hide();
+        });
+        //阻止事件冒泡
+        $('.sharing-title').on('click',function (event) {
+            event.stopPropagation();
+        });
+    });
+
+    var lottery={
+        index:0,	//当前转动到哪个位置，默认值0为起点位置
+        count:0,	//总共有多少个位置
+        timer:0,	//setTimeout的ID，用clearTimeout清除
+        times:0,	//当前转动的次数
+        speed:200,	//初始转动速度 值越大，速度越慢 可设置
+        cycle:10,	//转动基本次数：即至少需要转动多少次再进入抽奖环节 可设置
+        prize:-1,	//中奖位置 可设置
+        init:function(id){
+            if ($("#"+id).find(".lottery-unit").length>0) {
+                $lottery = $("#"+id);
+                $units = $lottery.find(".lottery-unit");
+                this.obj = $lottery;
+                this.count = $units.length;
+                $lottery.find(".lottery-unit-"+this.index).addClass("active");
+            };
+        },
+        roll:function() {
+            var index = this.index;
+            var count = this.count;
+            var lottery = this.obj;
+            $(lottery).find(".lottery-unit-" + index).removeClass("active");
+            index += 1;
+            if (index > count) {
+                index = 1;
+            }
+            ;
+            $(lottery).find(".lottery-unit-" + index).addClass("active");
+            this.index = index;
+            return false;
+        }
+    };
+
+    /*转盘抽奖*/
+    function roll(){
+        lottery.times += 1;
+        lottery.roll();
+        if (lottery.times > lottery.cycle+10 && lottery.prize==lottery.index) {
+            //抽奖完成弹框内容
+            var message = '恭喜抽中了'+lottery.prize+'奖品';
+            myDialog(message);
+
+            //转盘参数恢复初始化
+            clearTimeout(lottery.timer);
+            lottery.prize=-1;
+            lottery.times=0;
+            lottery.index=0;
+        }else{
+            if (lottery.times<lottery.cycle) {//当前转动次数 小于 给定的需要转动的次数
+                lottery.speed -= 10;// 加速
+            }else{//开始进入抽奖环节 速度减慢
+                if (lottery.times > lottery.cycle+10 && ((lottery.prize==0 && lottery.index==7) || lottery.prize==lottery.index+1)) {
+                    lottery.speed += 110;
+                }else{
+                    lottery.speed += 20;
+                }
+            }
+            //限制速度最小值，也就是最快的速度 为40
+            if (lottery.speed<40) {
+                lottery.speed=40;
+            };
+            lottery.timer = setTimeout(roll,lottery.speed);
+        }
+        return false;
+    };
+
+
+    /***
+     * 抽奖结果弹窗内容
+     * @param message 需要显示的内容
+     */
+    function myDialog(message){
+        $.confirm(message, function() {
+            //转盘初始化
+            if ($("#lottery").find(".active").length>0) {
+                $("#lottery").find(".active").removeClass('active');
+            };
+        });
+    }
+</script>
+
+</body>
+</html>

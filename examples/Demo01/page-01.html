@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Manny-Demos</title>
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <link href="../../dist/stylesheets/simpleui.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../../dist/stylesheets/base/vectors.css">
+    <link rel="stylesheet" href="../../dist/stylesheets/Demo01/page-01.css">
+</head>
+
+<body>
+    <div class="ranking">
+        <div class="ranking-item">
+            <div class="item-btn btn-add active" data-type="1">排行榜1</div>
+            <div class="item-btn btn-points" data-type="2">排行榜2</div>
+        </div>
+        <div class="tab">
+            <ul>
+                <li class="active" data-tab="1">累计</li>
+                <li data-tab="2">昨日</li>
+                <li data-tab="3">本周</li>
+                <li data-tab="4">本月</li>
+            </ul>
+
+        </div>
+        <div class="total">共有9999名人员</div>
+        <!--排行榜1-->
+        <div class="ranking-tab-content">
+            <table class="ranking-tab" data-target="ranking-table">
+                <thead>
+                <tr>
+                    <th>名次</th>
+                    <th>姓名</th>
+                    <th>数据1</th>
+                    <th>数据2</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- <tr>
+                     <td>1</td>
+                     <td>manny</td>
+                     <td>77</td>
+                     <td>346</td>
+                 </tr>
+                 <tr>
+                     <td>2</td>
+                     <td>人腾飞发鬼斧神工</td>
+                     <td>70</td>
+                     <td>346</td>
+                 </tr>
+                 <tr>
+                     <td colspan="4" class="empty">暂无数据</td>
+                 </tr>-->
+                </tbody>
+            </table>
+        </div>
+
+        <!--排行榜2-->
+        <!-- <table class="ranking-tab">
+             <thead>
+             <tr>
+                 <th>名次</th>
+                 <th>姓名</th>
+                 <th>所获积分</th>
+             </tr>
+             </thead>
+             <tbody>
+             <tr>
+                 <td>1</td>
+                 <td>人腾飞发鬼斧神工</td>
+                 <td>346</td>
+             </tr>
+             <tr>
+                 <td>2</td>
+                 <td>人腾飞...人斧神工</td>
+                 <td>346</td>
+             </tr>
+             <tr>
+                 <td colspan="3" class="empty">暂无数据</td>
+             </tr>
+             </tbody>
+         </table>-->
+    </div>
+
+<script src="../../dist/javascripts/zepto.min.js"></script>
+<script src="../../dist/javascripts/simpleui.min.js"></script>
+<script src="../../dist/javascripts/common.min.js"></script>
+<script>
+    $(function() {
+
+
+//请求列表数据
+        /*
+        * param
+        *
+        *   存储数据，第一次切换才请求，之后都使用缓存里的数据
+        *   刷新，缓存就会被清理，需要重新请求
+        *
+        * */
+        var listData = {
+            all: '',
+            yesterday: '',
+            week: '',
+            month: ''
+        };
+        var allDataList = {
+            'add':{
+                all: '',
+                yesterday: '',
+                week: '',
+                month: ''
+            },
+            'points':{
+                all: '',
+                yesterday: '',
+                week: '',
+                month: ''
+            }
+        };
+
+        $('.ranking .tab ul li').on('click', function () {
+            $(this).addClass('active').siblings().removeClass('active');
+
+            var _btnType = $('.ranking-item .item-btn.active').data('type');
+            //切换列表
+            //获取需要请求的类型：累计、昨日、本周、本月
+            var _tab = $(this).data('tab');
+            getAllList(_btnType, _tab);
+
+        });
+
+
+        /*排行榜按钮点击切换*/
+        $('.ranking-item .item-btn').on('click',function(){
+            //样式切换
+            $(this).addClass('active').siblings().removeClass('active');
+
+            var _btnType = $(this).data('type');//当前选中的btn
+            var _tab = $('.ranking .tab ul li.active').data('tab');//当前选中的tab
+
+            //加载数据
+            getAllList(_btnType, _tab);
+        });
+        $('.ranking-item .item-btn.active').click(); //默认加载active的数据
+
+        /*** 获取数据*/
+        function getAllList(btnType,tabType){
+            var _theadData = '';//表头
+            var _tbodyData ='' ;//表数据
+
+            getThead(btnType);//动态生成表头
+
+            var _btnType = '';
+            switch (btnType) {
+                case 1:
+                    _btnType = 'add';
+                    break;
+                case 2:
+                    _btnType = 'points';
+                    break;
+            }
+
+            var _tabType = '';
+            switch (tabType) {
+                case 1:
+                    _tabType = 'all';
+                    break;
+                case 2:
+                    _tabType = 'yesterday';
+                    break;
+                case 3:
+                    _tabType = 'week';
+                    break;
+                case 4:
+                    _tabType = 'month';
+                    break;
+            }
+            console.log('当前页请求类型btnType:'+ _btnType+";tabType:"+ _tabType);
+
+            /*如果已经请求过了，则退出*/
+            if(allDataList[_btnType][_tabType]!=''){
+                fullData(_btnType,allDataList[_btnType][_tabType]);
+                return false;
+            }
+
+            $('[data-target="ranking-table"] tbody').html('').parent().loading();//清空数据并显示loading
+
+            //TODO 模拟请求表数据
+            setTimeout(function(){
+                requestData(_btnType,_tabType);
+            },1000);
+
+            //请求数据
+            function requestData(_btnType,_tabType){
+                listData[_tabType] = [
+                    {
+                        username: 'Manny111',
+                        score: parseInt(Math.random() * 10000),
+                        enrollment:parseInt(Math.random() * 10000),
+                        subscribe:parseInt(Math.random() * 10000)
+                    },
+                    {
+                        username: 'Manny222',
+                        score: parseInt(Math.random() * 10000),
+                        enrollment:parseInt(Math.random() * 10000),
+                        subscribe:parseInt(Math.random() * 10000)
+                    },
+                    {
+                        username: 'Manny3',
+                        score: parseInt(Math.random() * 10000),
+                        enrollment:parseInt(Math.random() * 10000),
+                        subscribe:parseInt(Math.random() * 10000)
+                    }
+                ];
+
+                allDataList[_btnType][_tabType] =  listData[_tabType];
+                fullData(_btnType,allDataList[_btnType][_tabType]);
+            }
+
+            /*** 动态生成表头*/
+            function getThead(type){
+                if(type=='1'){//排行榜1
+                    _theadData += '<tr>' +
+                        '<th>名次</th>' +
+                        '<th>姓名</th>' +
+                        '<th>数据1</th>' +
+                        '<th>数据2</th>' +
+                        '</tr>';
+                }else{ //排行榜2
+                    _theadData += '<tr>' +
+                        '<th>名次</th>' +
+                        '<th>姓名</th>' +
+                        '<th>数据3</th>' +
+                        '</tr>';
+                }
+                $('[data-target="ranking-table"] thead').html(_theadData).parent().hideLoading();
+            }
+
+            //数据填充
+            function fullData(btnType,data) {
+                //数据为空
+                if(data.length==0 || data.length<0){
+                    if(btnType=='add'){
+                        _tbodyData += '<tr><td colspan="4" class="empty">暂无数据</td></tr>';
+                    }else{
+                        _tbodyData += '<tr><td colspan="3" class="empty">暂无数据</td></tr>';
+                    }
+                }else{
+                    /*填充数据*/
+                    for(var i = 0; i < data.length; i++) {
+                        if(btnType=='add'){
+                            _tbodyData += '<tr><td>'+(i + 1)+'</td><td>'+data[i].username+'</td><td>'+data[i].enrollment +'</td><td>'+data[i].subscribe +'</td></tr>';
+                        }else{
+                            _tbodyData += '<tr><td>'+(i + 1)+'</td><td>'+data[i].username+'</td><td>'+data[i].score +'</td></tr>';
+                        }
+                    }
+                }
+                $('[data-target="ranking-table"] tbody').html(_tbodyData).parent().hideLoading();
+            }
+        }
+    })
+</script>
+</body>
+</html>
