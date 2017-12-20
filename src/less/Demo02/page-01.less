@@ -1,0 +1,245 @@
+body{
+  background: rgba(0,0,0,0.1);
+  //  hover:#de686d,  #788087
+}
+
+.left-menu-content{
+  position:fixed;
+  top: 150px;
+  left:20px;
+  z-index: 9999;
+  width: 39px;
+  .show-left-menu{
+    width:100%;
+  }
+  .left-menu{
+    position: relative;
+    li{
+      width: 39px;
+      height: 50px;
+      margin:0;
+
+      &:nth-child(1){
+        height:70px;
+      }
+
+      button{
+        border: 0;
+        padding: 0;
+        background: rgba(0,0,0,0);
+        height: auto;
+        vertical-align: top;
+
+        .icon-box{
+          display: inline-block;
+          width: 39px;
+          height: 39px;
+          background: #fff;
+          border-radius: 50%;
+
+
+          .icon{
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+          }
+
+          .icon-dianzan{
+            background: url("../../images/Demo02/zan.png") center no-repeat;
+            background-size: 76%;
+          }
+          .icon-dianzan-hover{
+            background: url("../../images/Demo02/zan-hover.png") center no-repeat ;
+            background-size: 76%;
+          }
+
+
+
+          .icon-catalogue{
+            background: url("../../images/Demo02/catalogue.png") center no-repeat;
+            background-size: 65%;
+
+            &:hover{
+              background: url("../../images/Demo02/catalogue-hover.png") center no-repeat;
+              background-size: 65%;
+            }
+          }
+
+          .icon-collection{
+            background: url("../../images/Demo02/collection.png") center no-repeat;
+            background-size: 76%;
+
+            &:hover{
+              background: url("../../images/Demo02/collection-hover.png") center no-repeat;
+              background-size: 76%;
+            }
+          }
+
+          .icon-message{
+            background: url("../../images/Demo02/message.png") center no-repeat;
+            background-size: 76%;
+
+            &:hover{
+              background: url("../../images/Demo02/message-hover.png") center no-repeat;
+              background-size: 76%;
+            }
+          }
+
+          .icon-share{
+            background: url("../../images/Demo02/share.png") 40% no-repeat;
+            background-size: 65%;
+
+            &:hover{
+              background: url("../../images/Demo02/share-hover.png") 40% no-repeat;
+              background-size: 65%;
+            }
+          }
+        }
+
+        .txt{
+          color:#788087;
+          display: block;
+          text-align: center;
+          clear: both;
+          font-size: 12px;
+        }
+        .txt-hover{
+          color:#de686d;
+        }
+      }
+    }
+
+    #share-box{
+      position: relative;
+      z-index: 1;
+
+      .share-button-box{
+        position: absolute;
+        left: 0;
+        top: 42px;
+        width: 39px;
+        height: 165px;
+        .outside{
+          width: 39px;
+          height: 42px;
+          margin: 8px 0 0;
+          float: left;
+          position: relative;
+
+          span{
+            display: block;
+            width: 39px;
+            height: 39px;
+            line-height: 22px;
+            border-radius: 50%;
+            text-align: center;
+            clear: both;
+            background-color: #fff;
+
+            .icon{
+              display: inline-block;
+              width: 100%;
+              height: 100%;
+            }
+
+            .icon-sina{
+              background: url("../../images/Demo02/sina.png") center no-repeat;
+              background-size: 75%;
+            }
+            .icon-sina-hover{
+              background: url("../../images/Demo02/sina-hover.png") center no-repeat;
+              background-size: 75%;
+            }
+
+            .icon-wechat{
+              background: url("../../images/Demo02/wechat.png") center no-repeat;
+              background-size: 86%;
+            }
+            .icon-wechat-hover{
+              background: url("../../images/Demo02/wechat-hover.png") center no-repeat;
+              background-size: 86%;
+            }
+
+            .icon-qq{
+              background: url("../../images/Demo02/qq.png") center no-repeat;
+              background-size: 75%;
+            }
+            .icon-qq-hover{
+              background: url("../../images/Demo02/qq-hover.png") center no-repeat;
+              background-size: 75%;
+            }
+          }
+
+          a{
+            background: rgba(0,0,0,0);
+            padding: 0;
+            margin: 0;
+            height: 40px;
+            position: absolute;
+            width: 39px;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+          }
+        }
+      }
+    }
+
+    .catalogue-content{
+      background: #fff;
+      position: absolute;
+      width: 180px;
+      padding:16px;
+      left: 60px;
+      top: 60px;
+      border: 1px solid #d5d5d5;
+      border-radius: 4px;
+
+      .arr{
+        &:after{
+          content: "";
+          display: block;
+          position: absolute;
+          width: 0;
+          height: 0;
+          top: 25px;
+          left: -6px;
+          border-top: 4px solid transparent;
+          border-bottom: 4px solid transparent;
+          border-right: 6px solid #fff;
+        }
+      }
+      .catalogue{
+        ol{
+          li{
+            height: 30px;
+            a{
+              font-size: 12px;
+              font-weight: 400;
+              display: inline-block;
+              width: 95%;
+              height:30px;
+              line-height: 30px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              text-decoration: none;
+              color:#4f4f4f;
+
+              &:hover{
+                color:#c92027;
+              }
+            }
+          }
+        }
+      }
+      .catalogue,ol,li,a{
+        width: 100%;
+      }
+    }
+  }
+
+}
+
+
+

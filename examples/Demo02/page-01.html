@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Manny-Demos</title>
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <link href="../../dist/stylesheets/simpleui.min.css" rel="stylesheet" type="text/css">
+    <!--<link rel="stylesheet" href="../../dist/stylesheets/base/vectors.css">-->
+    <link rel="stylesheet" href="../../dist/stylesheets/Demo02/page-01.css">
+
+</head>
+
+<body>
+<div class="left-menu-content">
+    <!--收起时向右的小三角-->
+    <div class="show-left-menu">
+        <span>
+            <i class="icon"></i>
+        </span>
+    </div>
+    <div class="left-menu">
+        <ul>
+            <li id="dianzan">
+                <button type="button">
+                    <a class="icon-box" href="#"><i class="icon icon-dianzan"></i></a>
+                    <a href="#" class="txt">3</a>
+                </button>
+            </li>
+            <li>
+                <button>
+                    <a class="icon-box" href="#"><i class="icon icon-catalogue"></i></a>
+                </button>
+            </li>
+            <li>
+                <button>
+                    <a class="icon-box" href="#"><i class="icon icon-collection"></i></a>
+                </button>
+            </li>
+            <li>
+                <button>
+                    <a class="icon-box" href="#"><i class="icon icon-message"></i></a>
+                </button>
+            </li>
+            <li id="share-box">
+                <button>
+                    <a class="icon-box" href="#"><i class="icon icon-share"></i></a>
+                </button>
+                <div class="share-button-box" style="display: none">
+                    <div class="outside">
+                        <span><i class="icon icon-sina"></i></span>
+                        <a href="#" title="分享到新浪微博"></a>
+                    </div>
+                    <div class="outside">
+                        <span><i class="icon icon-wechat"></i></span>
+                        <a href="#" title="分享到微信"></a>
+                    </div>
+                    <div class="outside">
+                        <span><i class="icon icon-qq"></i></span>
+                        <a href="#" title="分享到QQ空间"></a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <!--目录-->
+        <div class="catalogue-content"  style="display: none">
+            <div class="arr"></div>
+            <div class="catalogue">
+                <ol>
+                    <li><a href="#">0.0.1-目录</a></li>
+                    <li><a href="#">0.0.2-目录，我是目录</a></li>
+                    <li><a href="#">0.0.3-目录就是我，我就是目录</a></li>
+                    <li><a href="#">0.0.4-目录目录，我是目录，是目录</a></li>
+                    <li><a href="#">0.0.5-目录</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+    $(function() {
+
+        zan();
+        share();
+        catalogue();
+    });
+
+    //点赞效果
+    function zan(){
+        var _zanFlag = false;//点赞标志
+        var _parent = '';
+        var _txtEle = '';
+        var _txtVal = '';
+        var _iconEle = '';
+
+         $('#dianzan button').hover(function() {
+             _parent = this;
+             _txtEle = $(_parent).children('.txt');
+             _txtVal = $(_txtEle).text();
+             _iconEle = $(_parent).find('.icon-dianzan');
+
+            $(_iconEle).addClass('icon-dianzan-hover');
+            _txtEle.addClass('txt-hover');
+        },function(){
+             if(!_zanFlag){
+                 $(_iconEle).removeClass('icon-dianzan-hover');
+                 _txtEle.removeClass('txt-hover');
+             }
+        });
+
+        //点赞效果
+        $('#dianzan button').on('click',function(){
+            _parent = this;
+            _txtEle = $(_parent).children('.txt');
+            _txtVal = $(_txtEle).text();
+            _iconEle = $(_parent).find('.icon-dianzan');
+
+            if(_zanFlag){//取消赞
+                _zanFlag = false;
+                if(_txtVal>0){
+                    _txtVal  =  parseInt(_txtVal)-1;
+                }
+                //背景图片改变
+                $(_iconEle).removeClass('icon-dianzan-hover');
+                _txtEle.removeClass('txt-hover');
+            }else{//点赞
+                _zanFlag = true;
+                _txtVal = parseInt(_txtVal)+1;
+
+                //背景图片改变
+                $(_iconEle).addClass('icon-dianzan-hover');
+                _txtEle.addClass('txt-hover');
+            }
+            _txtEle.text(_txtVal);
+        });
+
+    }
+
+    //分享
+    function share() {
+        //分享icon
+        $('#share-box').hover(function(){
+            $('.share-button-box').show();
+        },function () {
+            $('.share-button-box').hide();
+        });
+
+        //分享到第三方icon
+        var _iconEle = '';
+        var _iconClassName = '';
+        $('.outside a').hover(function(){
+            _iconEle = $(this).prev().children();
+            _iconClassName = $(this).prev().children().attr('class').substring(5);
+
+            $(_iconEle).addClass(_iconClassName+'-hover');
+        },function(){
+            $(_iconEle).removeClass(_iconClassName+'-hover');
+        });
+    }
+
+    //目录
+    function catalogue(){
+        $('.icon-catalogue').on('click',function(){
+            var _catalogue_content = $('.catalogue-content');
+
+            if(_catalogue_content.is(':hidden')){
+                $(_catalogue_content).show();
+            }else{
+                $(_catalogue_content).hide();
+            }
+        });
+    }
+</script>
+</body>
+</html>
