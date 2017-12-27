@@ -1,0 +1,107 @@
+html{
+  background: #2a2a2a;
+}
+
+body{
+  background: url("../../images/Demo01/background-main@2x.png") top repeat-y;
+  background-size: 100%;
+  color: #fff;
+  height: 7rem;
+  font-size: 0.28rem;
+}
+
+.progress-bar-01{
+  padding-top: 0.5rem;
+  .progress{
+    width: 5rem;
+    height: 0.3rem;
+    margin: 0 auto;
+    padding: 0.05rem;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 0.1rem;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
+
+    .progress-bar{
+      width: 10%;//可变
+      height:100%;
+      background: ghostwhite;
+      border-radius: 0.1rem;
+    }
+  }
+  .tip{
+    width: 5rem;
+    height: 0.3rem;
+    margin: 0 auto;
+    position: relative;
+
+    span{
+      position: absolute;
+    }
+
+    .start{
+      left: 0;
+    }
+    .end{
+      right:0;
+    }
+    .current{
+      left: 10%;//可变
+
+      i{
+        position: relative;
+        left: -0.2rem;
+        &:before{
+          content: '';
+          display: block;
+          width: 0;
+          height: 0;
+          border-left: 0.2rem solid transparent;
+          border-right: 0.2rem solid transparent;
+          border-top: 0.2rem solid #fff;
+          position: absolute;
+          top: -0.7rem;
+          left: 0;
+        }
+      }
+    }
+  }
+
+  .helper{
+    margin-top: 0.5rem;
+
+    .input-item{
+      padding: 0.2rem;
+
+      label{
+        display: inline-block;
+        width: 2.5rem;
+      }
+
+      input{
+        width: 3rem;
+        height: 0.5rem;
+        border: 0;
+        padding: 0 0.2rem;
+        border-radius: 0.1rem;
+        &:first-child{
+          margin-right: 0.2rem;
+        }
+      }
+
+      button{
+        display: inline-block;
+        height: 0.5rem;
+        padding: 0 0.2rem;
+        border-radius: 0.1rem;
+        margin-left: 0.2rem;
+        background: #fff;
+
+        &:active{
+          background: #F7B443;
+          color: #fff;
+        }
+      }
+    }
+  }
+}

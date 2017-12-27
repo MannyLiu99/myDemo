@@ -168,10 +168,13 @@
         $('.icon-catalogue').on('click',function(){
             var _catalogue_content = $('.catalogue-content');
 
+            console.log("开始")
             if(_catalogue_content.is(':hidden')){
                 $(_catalogue_content).show();
+                console.log("是关闭的")
             }else{
                 $(_catalogue_content).hide();
+                console.log("不是关闭的")
             }
         });
     }

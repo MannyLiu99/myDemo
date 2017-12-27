@@ -1,0 +1,271 @@
+html,body{
+  background: #FCECD2;
+}
+
+.main-content{
+  padding-bottom: 1.29rem;
+  .banner{
+    width: 7.5rem;
+    height: 3.75rem;
+    background: url("../../images/Demo01/banner_pic@2x.png") center no-repeat;
+    background-size: 100%;
+  }
+
+  .activity-info{
+    padding: 0 0.23rem;
+    margin-top: -1.03rem;
+    font-size: 0.28rem;
+    color: #B12C1D;
+
+    .time{
+      text-align: center;
+    }
+    .organizer-info{
+      margin-top: 0.131rem;
+      overflow:hidden;//很神奇的能撑开父元素
+    }
+    .left{
+      float: left;
+    }
+    .right{
+      float: right;
+    }
+  }
+
+  .ranking-content{
+    margin:  0.2rem 0.23rem 0;
+
+    .ranking-list-content{
+      background: #FBEBD1;
+      box-shadow: 0 0 0.1rem 0 #F1B67F;
+      border-radius: 0.2rem;
+      border: 0.05rem solid #FAD7AD;
+
+      .ranking{
+        background: #FBEBD1;
+        border-radius: 0.2rem 0.2rem 0 0;
+
+        table{
+          width: 100%;
+          text-align: center;
+          font-size: 0.28rem;
+          letter-spacing: -0.17px;
+
+          thead{
+            color: #B22B1D;
+            tr{
+              th{
+                text-align: center;
+                padding:0.11rem 0.15rem;
+              }
+            }
+          }
+
+          tbody{
+            color: #CD833F;
+            tr{
+              td{
+                text-align: center;
+                padding: 0.15rem 0;
+              }
+            }
+          }
+        }
+      }
+
+      .paging{
+        height: 0.7rem;
+        display: flex;
+        border-top: 0.05rem solid #FAD7AD;
+
+        &>*{
+          flex: 1;
+          text-align: center;
+          font-size: 0.28rem;
+          color: #CD833F;
+          letter-spacing: -0.14px;
+        }
+
+        .prev{
+          border-right: 0.05rem solid #FAD7AD;
+          border-radius: 0 0 0 0.2rem;
+        }
+        .next{
+          border-radius: 0 0 0.2rem 0;
+        }
+        //可点击样式
+        .clickable{
+          background: #F0B57E;
+          color: #F9F9F9;
+        }
+      }
+    }
+
+    .tips{
+      font-size: 0.22rem;
+      color: #B22B1D;
+      padding: 0.15rem 0 0.25rem 0;
+      border-bottom: 1px dashed #F0B57E;
+    }
+  }
+
+  .prize-list{
+    margin-top: 0.458rem;
+    .prize-item{
+      width: 6.5rem;
+      height: 6.2rem;
+      margin: 0 auto;
+      position: relative;
+
+      .prize-content{
+        height:5.342rem;
+        background: #F9D6AC;
+        box-shadow: 0 0 0.1rem 0 #EFB57E;
+        border-radius: 0.2rem;
+        padding-top: 0.25rem;
+
+        .prize-img{
+          width: 6rem;
+          height: 4rem;
+          background: #fff;
+          box-shadow: 0 0 0.1rem 0 #D9CAB3;
+          border-radius: 0.06rem;
+          margin: 0 auto 0;
+        }
+
+        .prize-tips{
+          color: #B22B1D;
+          text-align: center;
+          padding: 0.2rem 0;
+          h1{
+            font-size: 0.36rem;
+            letter-spacing: 0.06rem;
+          }
+          P{
+            font-size: 0.24rem;
+
+          }
+        }
+      }
+    }
+
+  }
+}
+
+.btn-bottom{
+  display: flex;
+  padding: 0 0.23rem;
+  position: fixed;
+  bottom: 0.2rem;
+  width: 7.04rem;
+  &>*{
+    flex: 1;
+    height: 0.89rem;
+    border: 0.05rem solid #F0B57E;
+    box-shadow: 0 0 0.1rem 0 #F0B57E;
+    border-radius: 1rem;
+    font-size: 0.36rem;
+    letter-spacing: -0.18px;
+
+    &:nth-child(2){
+      margin-left: 0.23rem;
+    }
+  }
+  .current{
+    color: #FFFFFF;
+    background: #F0B57E;
+  }
+  .default{
+    color: #F0B57E;
+    background: #FBEBD1;
+  }
+  &:nth-child(2){
+    margin-left: 0.23rem;
+  }
+}
+
+//重写弹框样式
+.sui-dialog{
+  width: 5.1rem;
+  background: #FBEBD1;
+  box-shadow: 0 0 0.1rem 0 #F1B67F;
+  border-radius: 0.16rem;
+
+  .sui-dialog-hd{
+    padding: 0.2rem;
+  }
+  .sui-dialog-bd{
+    padding: 0 .55rem;
+    .sui-dialog-input{
+      text-align: left;
+      .input-content{
+        font-size: 0.28rem;
+        color: #F0B57E;
+        letter-spacing: -0.14px;
+        background: #FFFFFF;
+        box-shadow: inset 0 0.01rem 0.04rem 0 #F0B57E;
+        border-radius: 0.1rem;
+        height: 0.7rem;
+        line-height: 0.7rem;
+        margin-bottom: 0.309rem;
+        text-align: left;
+        display: inline-block;
+
+        input{
+          border: none;
+          margin-top: 0;
+          height:0.407rem;
+          color: #F0B57E;
+          padding: 0 0.2rem;
+          &::placeholder{
+            opacity: 0.5;
+            color: #F0B57E;
+          }
+        }
+
+      }
+      .verification-content{
+        #verification-code{
+          width: 1.78rem;
+          border-right: 1px solid #FAD7AD;
+        }
+
+        #verification-code-img{
+          display: inline-block;
+          width:0.85rem;
+          padding: 0 0.15rem;
+        }
+        #change{
+          font-size: 0.28rem;
+          color: #F0B57E;
+          letter-spacing: -0.14px;
+          margin-left: 0.1rem;
+        }
+      }
+    }
+  }
+  .sui-dialog-ft{
+    button{
+      font-size: 0.36rem;
+      color: #F0B57E;
+      letter-spacing: 0.0771rem;
+      background: #FBEBD1;
+      border-top: 0.05rem solid #FAD7AD;
+
+      &:nth-child(1){
+        border-bottom-left-radius: 0.16rem;
+        border-right: 0.05rem solid #FAD7AD;
+      }
+      &:last-child{
+        border-right: 0;
+        border-bottom-right-radius: 0.16rem;
+      }
+    }
+  }
+}
+
+//重写toast样式
+.sui-toast-content{
+  bottom: 50%;
+  z-index: 9999;
+}
