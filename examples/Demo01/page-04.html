@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Manny-Demos</title>
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <link href="../../dist/stylesheets/simpleui.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../../dist/stylesheets/base/vectors.css">
+    <link rel="stylesheet" href="../../dist/stylesheets/Demo01/page-04.css">
+</head>
+
+<body>
+<div class="main-content">
+    <div class="banner"></div>
+    <!--活动信息-->
+    <div class="activity-info">
+        <div class="time">活动时间：2017.xx.xx~2018.xx.xx</div>
+        <div class="organizer-info">
+            <span class="left">主办方：中国道路运输协会</span>
+            <span class="right">承办方：中交出行</span>
+        </div>
+    </div>
+    <!--全国排行榜-->
+    <div class="ranking-content">
+        <div class="ranking-list-content">
+            <div class="ranking">
+                <table cellspacing="15">
+                    <thead>
+                    <tr>
+                        <th>名次</th>
+                        <th>姓名</th>
+                        <th>所在车企</th>
+                        <th>运营实力指数</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>233</td>
+                        <td>漯河出行</td>
+                        <td>333</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>火锅</td>
+                        <td>出行测试94...</td>
+                        <td>333</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>好的话</td>
+                        <td>出行测试94...</td>
+                        <td>333</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>已接近...</td>
+                        <td>出行测试94...</td>
+                        <td>333</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>就好好</td>
+                        <td>出行测试94...</td>
+                        <td>333</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>会嘎嘎...</td>
+                        <td>出行测试94...</td>
+                        <td>333</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>233</td>
+                        <td>漯河出行</td>
+                        <td>333</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="paging">
+                <button class="prev">上一页</button>
+                <button class="next clickable">下一页</button>
+            </div>
+        </div>
+        <div class="tips">(注:活动期间交易额、交易笔数以及注册量增长越快，运营指数越高)</div>
+    </div>
+    <!--奖品列表-->
+    <div class="prize-list">
+        <ul>
+            <li class="prize-item">
+                <div class="prize-content">
+                    <div class="prize-img"></div>
+                    <div class="prize-tips">
+                        <h1>一等奖</h1>
+                        <p>活动截止运营实力指数排名第1</p>
+                    </div>
+                </div>
+            </li>
+            <li class="prize-item">
+                <div class="prize-content">
+                    <div class="prize-img"></div>
+                    <div class="prize-tips">
+                        <h1>二等奖</h1>
+                        <p>活动截止运营实力指数排名第2-5</p>
+                    </div>
+                </div>
+            </li>
+            <li class="prize-item">
+                <div class="prize-content">
+                    <div class="prize-img"></div>
+                    <div class="prize-tips">
+                        <h1>三等奖</h1>
+                        <p>活动截止运营实力指数排名第6-15</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!--底部按钮-->
+<div class="btn-bottom">
+    <button class="current">奖品及活动说明</button>
+    <button class="default" id="show-detail">查看详细榜单</button>
+</div>
+
+<script src="../../dist/javascripts/zepto.min.js"></script>
+<script src="../../dist/javascripts/simpleui.min.js"></script>
+<script src="../../dist/javascripts/common.min.js"></script>
+<script>
+    $('#show-detail').on('click',function(){
+
+        var _html = '<div class="sui-dialog-input">' +
+            '<div class="input-content"><input type="text" placeholder="请输入员工手机号" id="phone-no"/></div>' +
+            '<div class="verification-content">' +
+            '<span class="input-content">' +
+            '<input type="text" placeholder="请输验证码" id="verification-code"/>' +
+            '<span id="verification-code-img">lnnd</span>' +
+            '</span>' +
+            '<span id="change">换一个</span>' +
+            '</div>' +
+            '</div>';
+
+        $.dialog({
+            title: '',
+            text: '',
+            html: _html,
+            autoClose: false,
+            buttons: [{
+                text: '取消',
+                onClick: function() {
+                    $.closeDialog();
+                }
+            }, {
+                text: '确定',
+                onClick: function(data) {
+                    // 判断手机号是否为空
+                    if(data[0].length <= 0) {
+                        $('.sui-dialog-input input')[0].focus();//获取焦点
+                        $.toast('手机号不能为空', function() {
+                            console.log('手机号不能为空');
+                        });
+                        return;
+                    }
+                    // 判断验证码是否为空
+                    if(data[1].length <= 0) {
+                        $('.sui-dialog-input input')[1].focus();//获取焦点
+                        $.toast('验证码不能为空', function() {
+                            console.log('验证码不能为空');
+                        });
+                        return;
+                    }
+                    console.log(data);
+                    $.closeDialog();
+                }
+            }]
+        });
+
+        $('#change').on('click',function(){
+            console.log('换验证码111')
+        });
+
+    });
+
+
+
+</script>
+</body>
+</html>

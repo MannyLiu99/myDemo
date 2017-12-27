@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Manny-Demos</title>
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <link href="../../dist/stylesheets/simpleui.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../../dist/stylesheets/base/vectors.css">
+    <link rel="stylesheet" href="../../dist/stylesheets/Demo01/progress-bar.css">
+</head>
+
+<body>
+    <section class="progress-bar-01">
+        <div class="progress">
+            <div class="progress-bar"></div>
+        </div>
+        <div class="tip">
+            <span class="start">0</span>
+            <span class="current"><i><span>15</span></i></span>
+            <span class="end">20</span>
+        </div>
+        <div class="helper">
+            <div class="input-item"><label>请输入结束值:</label><input value="20" id="end"/></div>
+            <div class="input-item"><label>请输入当前进度值:</label><input value="15" id="current"/><button class="OK">确定</button></div>
+        </div>
+    </section>
+
+<script src="../../dist/javascripts/zepto.min.js"></script>
+<script src="../../dist/javascripts/simpleui.min.js"></script>
+<script src="../../dist/javascripts/common.min.js"></script>
+<script>
+    $(function () {
+
+        showbar();
+
+        $('.OK').on('click',function(){
+            showbar();
+        })
+    })
+
+    function showbar() {
+        var _current = parseFloat($('#current').val());
+        var _end = parseFloat($('#end').val());
+        var _cw = 0;
+        if(_current < _end){
+            if(_end > 0){
+                _cw = (_current/_end) * 100 +'%';
+            }
+        } else if(_current >= _end){
+            $.toast('当前进度大于最终值啦', function() {
+                //TODO
+            });
+            return;
+        }
+        $('.progress-bar').css({'width':_cw});
+        $('.current').css({'left':_cw});
+
+        //回写
+        $('.end').text(_end);
+        $('.current i span').text(_current);
+
+    }
+</script>
+</body>
+</html>
